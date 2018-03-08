@@ -3,8 +3,12 @@ import PropTypes from 'prop-types'
 
 class BookShelfChanger extends Component {
     static propTypes = {
-        shelf: PropTypes.string.isRequired,
+        shelf: PropTypes.string,
         changeShelf:  PropTypes.func.isRequired
+    }
+
+    static defaultProps = {
+        shelf: 'none'
     }
 
     render() {
