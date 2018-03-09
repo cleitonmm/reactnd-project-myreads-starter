@@ -1,8 +1,9 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import "./App.css";
-import BookShelf from "./BookShelf";
-import SearchBooks from './SearchBooks'
+import SearchBooks from "./SearchBooks";
 import * as BooksAPI from "./BooksAPI";
+import MyReads from "./MyReads";
 
 class BooksApp extends React.Component {
   state = {
@@ -35,42 +36,26 @@ class BooksApp extends React.Component {
   };
 
   render() {
-    const bookShelfs = [
-      { id: "currentlyReading", title: "Currently Reading" },
-      { id: "wantToRead", title: "Want to Read" },
-      { id: "read", title: "Read" }
-    ];
-
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks changeShelf={book => this.changeShelf(book)}/>  
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                {bookShelfs.map(shelf => (
-                  <BookShelf
-                    key={shelf.id}
-                    books={this.state.books.filter(
-                      book => book.shelf === shelf.id
-                    )}
-                    title={shelf.title}
-                    changeShelf={book => this.changeShelf(book)}
-                  />
-                ))}
-              </div>
-              <div className="open-search">
-                <a onClick={() => this.setState({ showSearchPage: true })}>
-                  Add a book
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
+        <Route
+          path="/search"
+          component={() => (
+            <SearchBooks 
+              changeShelf={book => this.changeShelf(book)} 
+              booksOnShelf={this.state.books}
+            />
+          )}
+        />
+
+        <Route
+          exact path="/"
+          component={() => (
+            <MyReads
+              changeShelf={book => this.changeShelf(book)}
+            />
+          )}
+        />
       </div>
     );
   }

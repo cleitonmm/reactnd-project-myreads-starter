@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as BooksAPI from "./BooksAPI";
 import BookShelf from "./BookShelf";
+import { Link } from "react-router-dom";
 
 class SearchBooks extends Component {
   static propsTypes = {
-    changeShelf: PropTypes.func.isRequired
+    changeShelf: PropTypes.func.isRequired,
+    booksOnShelf: PropTypes.array
   };
 
   state = {
@@ -40,12 +42,12 @@ class SearchBooks extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <a
+          <Link
             className="close-search"
-            onClick={() => this.setState({ showSearchPage: false })}
+            to="/"
           >
             Close
-          </a>
+          </Link>
           <div className="search-books-input-wrapper">
             <input
               type="text"

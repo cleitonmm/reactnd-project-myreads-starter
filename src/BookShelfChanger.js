@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 class BookShelfChanger extends Component {
     static propTypes = {
         shelf: PropTypes.string,
-        changeShelf:  PropTypes.func.isRequired
+        changeShelf:  PropTypes.func.isRequired,
+        booksOnShelf: PropTypes.array
     }
 
     static defaultProps = {
