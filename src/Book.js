@@ -1,18 +1,27 @@
 import React, { Component } from "react";
 import BookShelfChanger from './BookShelfChanger'
 import PropTypes from 'prop-types'
+import * as BooksAPI from './BooksAPI'
 
 class Book extends Component {
   static propTypes = {
       book: PropTypes.object.isRequired,
-      changeShelf: PropTypes.func.isRequired,
-      booksOnShelf: PropTypes.array
+      updateShelf: PropTypes.func
   }
 
-  changeShelf = shelf => {
-      this.props.book.shelf = shelf;
-      this.props.changeShelf(this.props.book)
-  }
+  changeShelf = newShelf => {
+    const book = this.props.book
+    book.shelf = newShelf 
+    
+    BooksAPI.update(book, book.shelf)
+      .then(() => {
+        this.setState({ book })
+        if(this.props.updateShelf) this.props.updateShelf(book)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   render() {
     const { book } = this.props  

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as BooksAPI from "./BooksAPI";
 import BookShelf from "./BookShelf";
 import { Link } from "react-router-dom";
+import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component {
   static propsTypes = {
-    changeShelf: PropTypes.func.isRequired,
-    booksOnShelf: PropTypes.array
+    booksOnShelf: PropTypes.array.isRequired
   };
 
   state = {
@@ -16,14 +15,18 @@ class SearchBooks extends Component {
     foundBooks: []
   };
 
+  /**TODO:  Previnir que ao apagar rapidamente a pesquisa mostre resultados inválidos 
+    *Exemplo: se apagar rapidamente a promise BooksAPI.Search poderá retornar resultados 
+    *         de uma execução anterior já que o campo de pesquisa vazio não executa novamente a promise  
+  */
   shouldComponentUpdate(nextProps, nextStates) {
     if (nextStates.query === nextStates.prevQuery) return true;
-    else return false;
+    return false;
   }
 
   searchBook = query => {
     let prevQuery = query;
-    this.setState({ query, prevQuery });
+    this.setState({ query, prevQuery, updade: true });
     if (query) {
       BooksAPI.search(query)
         .then(foundBooks => {
@@ -59,7 +62,7 @@ class SearchBooks extends Component {
         <div className="search-books-results">
          <BookShelf 
              books={this.state.foundBooks} 
-             changeShelf={(book) => this.props.changeShelf(book)}/>
+             booksOnShelf={this.props.booksOnShelf}/>
         </div>
       </div>
     );

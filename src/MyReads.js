@@ -5,9 +5,13 @@ import { Link } from 'react-router-dom'
 
 class MyReads extends Component {
   static propTypes = {
-    changeShelf: PropTypes.func.isRequired,
     books: PropTypes.array.isRequired
   };
+
+  updateShelf = book => {
+    const books = this.props.books.filter(b => b.id !== book.id).concat(book)
+    this.setState({ books })
+  }
 
   render() {
     const bookShelfs = [
@@ -27,7 +31,7 @@ class MyReads extends Component {
                 key={shelf.id}
                 books={this.props.books.filter(book => book.shelf === shelf.id)}
                 title={shelf.title}
-                changeShelf={book => this.props.changeShelf(book)}
+                updateShelf={(book) => this.updateShelf(book)}
               />
             ))}
           </div>
