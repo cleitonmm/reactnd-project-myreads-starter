@@ -33,7 +33,7 @@ class Book extends Component {
             backgroundSize: 'cover',
             height: '100%',
             width: '100%',  
-            backgroundImage: `url(${book.imageLinks.thumbnail})` 
+            backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : ''})` 
           }}
         />
         <BookShelfChanger 
