@@ -13,20 +13,20 @@ class BooksApp extends React.Component {
 
   getMyBooks = () => {
     BooksAPI.getAll()
-    .then(books => {
-      this.setState({ books });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
+      .then(books => {
+        this.setState({ books });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   componentDidMount() {
-    this.getMyBooks()
+    this.getMyBooks();
   }
-
+  // TODO: utilizado para atualizar o componente ao retornar da página de pesquisa.
   componentWillReceiveProps() {
-    this.getMyBooks()
+    this.getMyBooks();
   }
 
   render() {
@@ -34,20 +34,13 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route
           path="/search"
-          component={() => (
-            <SearchBooks 
-              booksOnShelf={this.state.books}
-            />
-          )}
+          component={() => <SearchBooks booksOnShelf={this.state.books} />}
         />
 
         <Route
-          exact path="/"
-          component={() => (
-            <MyReads
-              books={this.state.books}
-            />
-          )}
+          exact
+          path="/"
+          component={() => <MyReads books={this.state.books} />}
         />
       </div>
     );

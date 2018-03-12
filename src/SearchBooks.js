@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import BookShelf from "./BookShelf";
 import { Link } from "react-router-dom";
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from "./BooksAPI";
 
 class SearchBooks extends Component {
   static propsTypes = {
@@ -15,10 +15,10 @@ class SearchBooks extends Component {
     foundBooks: []
   };
 
-  /**TODO:  Previnir que ao apagar rapidamente a pesquisa mostre resultados inválidos 
-    *Exemplo: se apagar rapidamente a promise BooksAPI.Search poderá retornar resultados 
-    *         de uma execução anterior já que o campo de pesquisa vazio não executa novamente a promise  
-  */
+  /*TODO:  Previnir que ao apagar rapidamente a pesquisa mostre resultados inválidos
+   *Exemplo: se apagar rapidamente a promise BooksAPI.Search poderá retornar resultados
+   *         de uma execução anterior já que o campo de pesquisa vazio não executa novamente a promise
+   */
   shouldComponentUpdate(nextProps, nextStates) {
     if (nextStates.query === nextStates.prevQuery) return true;
     return false;
@@ -30,7 +30,11 @@ class SearchBooks extends Component {
     if (query) {
       BooksAPI.search(query)
         .then(foundBooks => {
-          if (Object.prototype.toString.call(foundBooks) !== Object.prototype.toString.call(this.state.foundBooks)) foundBooks = []
+          if (
+            Object.prototype.toString.call(foundBooks) !==
+            Object.prototype.toString.call(this.state.foundBooks)
+          )
+            foundBooks = [];
           this.setState({ foundBooks, prevQuery });
         })
         .catch(err => {
@@ -45,10 +49,7 @@ class SearchBooks extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link
-            className="close-search"
-            to="/"
-          >
+          <Link className="close-search" to="/">
             Close
           </Link>
           <div className="search-books-input-wrapper">
@@ -60,9 +61,10 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-         <BookShelf 
-             books={this.state.foundBooks} 
-             booksOnShelf={this.props.booksOnShelf}/>
+          <BookShelf
+            books={this.state.foundBooks}
+            booksOnShelf={this.props.booksOnShelf}
+          />
         </div>
       </div>
     );

@@ -1,20 +1,24 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class BookShelfChanger extends Component {
-    static propTypes = {
-        shelf: PropTypes.string,
-        changeShelf:  PropTypes.func.isRequired,
-        booksOnShelf: PropTypes.array
-    }
+  static propTypes = {
+    shelf: PropTypes.string,
+    changeShelf: PropTypes.func.isRequired,
+    booksOnShelf: PropTypes.array
+  };
 
-    static defaultProps = {
-        shelf: 'none'
-    }
+  static defaultProps = {
+    shelf: "none"
+  };
 
-    render() {
-        return <div className="book-shelf-changer">
-        <select value={this.props.shelf} onChange={(event) => this.props.changeShelf(event.target.value)}>
+  render() {
+    return (
+      <div className="book-shelf-changer">
+        <select
+          value={this.props.shelf}
+          onChange={event => this.props.changeShelf(event.target.value)}
+        >
           <option value="null" disabled>
             Move to...
           </option>
@@ -24,7 +28,8 @@ class BookShelfChanger extends Component {
           <option value="none">None</option>
         </select>
       </div>
-    }
+    );
+  }
 }
 
 export default BookShelfChanger;

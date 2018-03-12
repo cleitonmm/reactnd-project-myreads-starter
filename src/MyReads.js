@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import BookShelf from './BookShelf'
-import { Link } from 'react-router-dom'
+import BookShelf from "./BookShelf";
+import { Link } from "react-router-dom";
 
 class MyReads extends Component {
   static propTypes = {
@@ -9,9 +9,9 @@ class MyReads extends Component {
   };
 
   updateShelf = book => {
-    const books = this.props.books.filter(b => b.id !== book.id).concat(book)
-    this.setState({ books })
-  }
+    const books = this.props.books.filter(b => b.id !== book.id).concat(book);
+    this.setState({ books });
+  };
 
   render() {
     const bookShelfs = [
@@ -31,7 +31,7 @@ class MyReads extends Component {
                 key={shelf.id}
                 books={this.props.books.filter(book => book.shelf === shelf.id)}
                 title={shelf.title}
-                updateShelf={(book) => this.updateShelf(book)}
+                updateShelf={book => this.updateShelf(book)}
               />
             ))}
           </div>
