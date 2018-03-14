@@ -11,22 +11,11 @@ class SearchBooks extends Component {
 
   state = {
     query: "",
-    prevQuery: "",
     foundBooks: []
   };
 
-  /*TODO:  Previnir que ao apagar rapidamente a pesquisa mostre resultados inválidos
-   *Exemplo: se apagar rapidamente a promise BooksAPI.Search poderá retornar resultados
-   *         de uma execução anterior já que o campo de pesquisa vazio não executa novamente a promise
-   */
-  shouldComponentUpdate(nextProps, nextStates) {
-    if (nextStates.query === nextStates.prevQuery) return true;
-    return false;
-  }
-
   searchBook = query => {
-    let prevQuery = query;
-    this.setState({ query, prevQuery, updade: true });
+    this.setState({ query });
     if (query) {
       BooksAPI.search(query)
         .then(foundBooks => {
@@ -35,7 +24,8 @@ class SearchBooks extends Component {
             Object.prototype.toString.call(this.state.foundBooks)
           )
             foundBooks = [];
-          this.setState({ foundBooks, prevQuery });
+          if (query === this.state.query)  
+            this.setState({ foundBooks });
         })
         .catch(err => {
           console.log(err);
