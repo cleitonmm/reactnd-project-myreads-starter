@@ -49,7 +49,10 @@ class SearchBooks extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className="close-search" to={ {pathname: "/", state: {coisa: 'coisa'}}}>
+          <Link
+            className="close-search"
+            to={{ pathname: "/", state: { coisa: "coisa" } }}
+          >
             Close
           </Link>
           <div className="search-books-input-wrapper">

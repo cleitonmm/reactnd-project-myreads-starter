@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import BookShelfChanger from "./BookShelfChanger";
-import StarRating from './StarRating'
+import StarRating from "./StarRating";
 import PropTypes from "prop-types";
 import * as BooksAPI from "./BooksAPI";
 
@@ -47,7 +47,7 @@ class Book extends Component {
             }}
           />
         </div>
-        <StarRating averageRating={book.averageRating}/>
+        <StarRating averageRating={book.averageRating} />
         <div className="book-title">{book.title}</div>
         <div className="book-authors">
           {book.authors ? book.authors.join("; ") : ""}

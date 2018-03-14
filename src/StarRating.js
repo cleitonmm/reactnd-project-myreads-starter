@@ -17,7 +17,7 @@ class StarRating extends Component {
     for (let i = 1; i <= 5; i++) {
       if (i <= this.props.averageRating)
         stars.push(<span className="star on" key={i} />);
-      else if ((i - this.props.averageRating) < 1)
+      else if (i - this.props.averageRating < 1)
         stars.push(<span className="star half" key={i} />);
       else stars.push(<span className="star" key={i} />);
     }

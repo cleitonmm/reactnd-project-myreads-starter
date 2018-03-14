@@ -18,9 +18,8 @@ class BooksApp extends React.Component {
       .catch(err => {
         console.log(err);
       });
-  }
+  };
 
-  
   render() {
     return (
       <div className="app">
@@ -32,7 +31,9 @@ class BooksApp extends React.Component {
         <Route
           exact
           path="/"
-          render={() => <MyReads books={this.state.books} getMyBooks={this.getMyBooks}/>}
+          render={() => (
+            <MyReads books={this.state.books} getMyBooks={this.getMyBooks} />
+          )}
         />
       </div>
     );

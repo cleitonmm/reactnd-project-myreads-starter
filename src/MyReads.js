@@ -15,7 +15,7 @@ class MyReads extends Component {
   };
 
   componentDidMount() {
-    this.props.getMyBooks()    
+    this.props.getMyBooks();
   }
 
   render() {
