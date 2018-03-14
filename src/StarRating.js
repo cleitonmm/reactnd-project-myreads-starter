@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import "font-awesome/css/font-awesome.min.css";
 
-class StarRating extends Component {
+class StarRating extends PureComponent {
   static propTypes = {
     averageRating: PropTypes.number
   };
