@@ -10,15 +10,10 @@ class BooksApp extends React.Component {
     books: []
   };
 
-  getMyBooks = () => {
-    BooksAPI.getAll()
-      .then(books => {
-        this.setState({ books });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  async getMyBooks() {
+    const books = await BooksAPI.getAll();
+    this.setState({ books })
+  }
 
   render() {
     return (
@@ -32,7 +27,7 @@ class BooksApp extends React.Component {
           exact
           path="/"
           render={() => (
-            <MyReads books={this.state.books} getMyBooks={this.getMyBooks} />
+            <MyReads books={this.state.books} getMyBooks={this.getMyBooks.bind(this)} />
           )}
         />
       </div>
