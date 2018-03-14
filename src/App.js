@@ -7,7 +7,6 @@ import MyReads from "./MyReads";
 
 class BooksApp extends React.Component {
   state = {
-    showSearchPage: false,
     books: []
   };
 
@@ -19,28 +18,21 @@ class BooksApp extends React.Component {
       .catch(err => {
         console.log(err);
       });
-  };
-
-  componentDidMount() {
-    this.getMyBooks();
-  }
-  // TODO: utilizado para atualizar o componente ao retornar da página de pesquisa.
-  componentWillReceiveProps() {
-    this.getMyBooks();
   }
 
+  
   render() {
     return (
       <div className="app">
         <Route
           path="/search"
-          component={() => <SearchBooks booksOnShelf={this.state.books} />}
+          render={props => <SearchBooks booksOnShelf={this.state.books} />}
         />
 
         <Route
           exact
           path="/"
-          component={() => <MyReads books={this.state.books} />}
+          render={() => <MyReads books={this.state.books} getMyBooks={this.getMyBooks}/>}
         />
       </div>
     );
